@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Instance Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(fruit, index) in fruits" :key="fruit" @click="removeFruit(index)">
+                {{ fruit }}
+            </li>
+        </ul>
+        <button @click="addFruit">Add Fruit</button>
+    </div>
+    
+    <script>
+        new Vue({
+            el: '#app',
+        data: {
+            fruits: ['Apple', 'Banana', 'Cherry']
+        },
+            methods: {
+                addFruit() {
+                this.fruits.push('Mango'); // Example fruit
+            },
+                removeFruit(index) {
+                    this.fruits.splice(index, 1);
+                }
+            }
+        });
+    </script>
+    
+
+</body>
+</html>

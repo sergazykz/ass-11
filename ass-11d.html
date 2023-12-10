@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Instance Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form @submit.prevent="validateForm">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" v-model="username">
+            </div>
+            <p v-if="errors.username">Username is required.</p>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" v-model="email">
+            </div>
+            <p v-if="errors.email">Enter a valid email address.</p>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" v-model="password">
+            </div>
+            <p v-if="errors.password">Password must be at least 6 characters long.</p>
+
+        <button type="submit" :disabled="errors.username || errors.email || errors.password">Register</button>
+        </form>
+    </div>
+    
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                username: '',
+                email: '',
+                password: '',
+                errors: {
+                    username: false,
+                    email: false,
+                    password: false
+                }
+            },methods: {
+            validateForm() {
+                this.errors.username = !this.username;
+                this.errors.email = !this.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+                this.errors.password = this.password.length < 6;
+
+                if (!this.errors.username && !this.errors.email && !this.errors.password) {
+                    console.log(username.value,email.value,password.value);
+                }
+            }
+        }
+        });
+    </script>
+    
+
+</body>
+</html>

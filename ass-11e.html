@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Instance Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+        .incomplete {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="newTask">
+        <button @click="addTask">Add Task</button>
+    
+        <ul>
+            <li v-for="task in tasks" :key="task.title" :class="{ completed: task.completed, incomplete: !task.completed }">
+                <input type="checkbox" v-model="task.completed">
+                {{ task.title }}
+            </li>
+        </ul>
+    </div>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                tasks: [
+                { title: 'Assignment', completed: false },
+                { title: 'quiz', completed: false },
+            ],
+            newTask: ''
+            },
+            methods: {
+                addTask() {
+                    if (this.newTask.trim()) {
+                        this.tasks.push({ title: this.newTask, completed: false });
+                        this.newTask = '';
+                    }
+                }
+            }
+        });
+    </script>
+    
+
+</body>
+</html>
